@@ -9,10 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="library" name="lwjgl" level="project" />
-    <orderEntry type="library" name="lwjgl-assimp" level="project" />
     <orderEntry type="library" name="lwjgl-bgfx" level="project" />
-    <orderEntry type="library" name="lwjgl-cuda" level="project" />
     <orderEntry type="library" name="lwjgl-opengl" level="project" />
     <orderEntry type="library" name="lwjgl-glfw" level="project" />
+    <orderEntry type="library" name="lwjgl-stb" level="project" />
   </component>
 </module>
