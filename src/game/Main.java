@@ -1,11 +1,5 @@
 package game;
 
-import org.lwjgl.*;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
-import renderer.Texture;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

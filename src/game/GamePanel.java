@@ -14,7 +14,7 @@ public class GamePanel extends JPanel{
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    final Color backgroundColor = new Color(1f, 0.5f, 0f);
+    final Color backgroundColor = new Color(0.933f, 0.60f, 0.612f);
 
     Thread gameThread;
 
