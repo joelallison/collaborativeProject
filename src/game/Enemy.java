@@ -4,8 +4,8 @@ public class Enemy extends Entity{
     private String species;
     private int difficulty;
 
-    public Enemy(int health, int coins, Weapon weapon, int points, String species, int difficulty) {
-        super(health, coins, weapon, points);
+    public Enemy(int health, int coins, Weapon weapon, int points, int XPos, int YPos, int speed, String species, int difficulty) {
+        super(health, coins, weapon, points, XPos, YPos, speed);
         this.species = species;
         this.difficulty = difficulty;
     }
