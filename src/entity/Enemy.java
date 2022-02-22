@@ -1,4 +1,4 @@
-package game;
+package entity;
 
 public class Enemy extends Entity{
     private String species;

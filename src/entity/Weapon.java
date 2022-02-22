@@ -1,4 +1,4 @@
-package game;
+package entity;
 
 public class Weapon {
     private String weaponName;

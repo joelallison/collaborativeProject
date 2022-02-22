@@ -1,6 +1,6 @@
-package game;
+package entity;
 
-public class Player extends Entity{
+public class Player extends Entity {
     private double XVel = 0;
     private double YVel = 0;
     private int abl1 = 0;

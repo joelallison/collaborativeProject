@@ -1,4 +1,6 @@
-package game;
+package main;
+
+import entity.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     int FPS = 60;
 
-    Player player = new Player(1, 0, null, 100, 0, 0, 2, 0.0, 0.0, 0, 0);
+    Player player = new Player(1, 0, null, 100, 300, 300, 2, 5, 5, 0, 0); //spawns in with slight velocity, nice effect
 
     public GamePanel() {
 
