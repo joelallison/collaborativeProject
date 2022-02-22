@@ -78,37 +78,39 @@ public class GamePanel extends JPanel implements Runnable {
 
         //player movement
         if (keyH.upPressed) {
-            player.setYVel(player.getYVel() - player.getSpeed());
+            player.setyVel(player.getyVel() - player.getSpeed());
         }
         if (keyH.downPressed) {
-            player.setYVel(player.getYVel() + player.getSpeed());
+            player.setyVel(player.getyVel() + player.getSpeed());
         }
         if (keyH.leftPressed) {
-            player.setXVel(player.getXVel() - player.getSpeed());
+            player.setxVel(player.getxVel() - player.getSpeed());
         }
         if (keyH.rightPressed) {
-            player.setXVel(player.getXVel() + player.getSpeed());
+            player.setxVel(player.getxVel() + player.getSpeed());
         }
 
         //limit max speed
-        if (player.getXVel() > (player.getSpeed() * 3.5)){
-            player.setXVel((player.getSpeed() * 3.5));
+        if (player.getxVel() > (player.getSpeed() * 3.5)){
+            player.setxVel((player.getSpeed() * 3.5));
         }
-        if (player.getXVel() < (0 - (player.getSpeed() * 3.5))){
-            player.setXVel((0 - (player.getSpeed() * 3.5)));
+        if (player.getxVel() < (0 - (player.getSpeed() * 3.5))){
+            player.setxVel((0 - (player.getSpeed() * 3.5)));
         }
-        if (player.getYVel() > (player.getSpeed() * 3.5)){
-            player.setYVel((player.getSpeed() * 3.5));
+        if (player.getyVel() > (player.getSpeed() * 3.5)){
+            player.setyVel((player.getSpeed() * 3.5));
         }
-        if (player.getYVel() < (0 - (player.getSpeed() * 3.5))){
-            player.setYVel((0 - (player.getSpeed() * 3.5)));
+        if (player.getyVel() < (0 - (player.getSpeed() * 3.5))){
+            player.setyVel((0 - (player.getSpeed() * 3.5)));
         }
 
-        player.setXVel(player.getXVel() * 0.93);
-        player.setYVel(player.getYVel() * 0.93);
+        //creates glide effect
+        player.setxVel(player.getxVel() * 0.93);
+        player.setyVel(player.getyVel() * 0.93);
 
-        player.setxPos((player.getxPos() + player.getXVel()));
-        player.setyPos((player.getyPos() + player.getYVel()));
+        //changing the positions by velocity implements the glide
+        player.setxPos((player.getxPos() + player.getxVel()));
+        player.setyPos((player.getyPos() + player.getyVel()));
 
     }
 

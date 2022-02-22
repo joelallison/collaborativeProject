@@ -1,26 +1,26 @@
 package entity;
 
 public class Player extends Entity {
-    private double XVel = 0;
-    private double YVel = 0;
+    private double xVel = 0;
+    private double yVel = 0;
     private int abl1 = 0;
     private int abl2;
 
     public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, double XVel, double YVel, int abl1, int abl2) {
         super(health, coins, weapon, points, xPos, yPos, speed);
-        this.XVel = XVel;
-        this.YVel = YVel;
+        this.xVel = XVel;
+        this.yVel = YVel;
         this.abl1 = abl1;
         this.abl2 = abl2;
     }
 
-    public double getXVel() { return XVel; }
+    public double getxVel() { return xVel; }
 
-    public void setXVel(double XVel) { this.XVel = XVel; }
+    public void setxVel(double xVel) { this.xVel = xVel; }
 
-    public double getYVel() { return YVel; }
+    public double getyVel() { return yVel; }
 
-    public void setYVel(double YVel) { this.YVel = YVel; }
+    public void setyVel(double yVel) { this.yVel = yVel; }
 
     public int getAbl1() {
         return abl1;
