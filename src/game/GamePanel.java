@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
-    final Color backgroundColor = new Color(0.804f, 0.745f, 0.675f);
+    final Color backgroundColor = new Color(0.3109f, 0.3057f, 0.3834f);
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
