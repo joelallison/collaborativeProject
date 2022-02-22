@@ -1,13 +1,15 @@
 package entity;
 
+import java.awt.image.BufferedImage;
+
 public class Player extends Entity {
     private double xVel = 0;
     private double yVel = 0;
     private int abl1 = 0;
     private int abl2;
 
-    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, double XVel, double YVel, int abl1, int abl2) {
-        super(health, coins, weapon, points, xPos, yPos, speed);
+    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, BufferedImage image, double XVel, double YVel, int abl1, int abl2) {
+        super(health, coins, weapon, points, xPos, yPos, speed, image);
         this.xVel = XVel;
         this.yVel = YVel;
         this.abl1 = abl1;

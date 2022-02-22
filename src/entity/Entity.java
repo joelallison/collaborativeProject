@@ -1,5 +1,7 @@
 package entity;
 
+import java.awt.image.BufferedImage;
+
 public class Entity {
     private int health;
     private int coins;
@@ -8,8 +10,9 @@ public class Entity {
     private double xPos;
     private double yPos;
     private int speed;
+    public BufferedImage image;
 
-    public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, int speed) {
+    public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, int speed, BufferedImage image) {
         this.health = health;
         this.coins = coins;
         this.weapon = weapon;
@@ -17,6 +20,7 @@ public class Entity {
         this.xPos = xPos;
         this.yPos = yPos;
         this.speed = speed;
+        this.image = image;
     }
 
     public int getHealth() {
