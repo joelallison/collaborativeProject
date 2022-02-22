@@ -5,11 +5,11 @@ public class Entity {
     private int coins;
     private int points;
     private Weapon weapon;
-    private int xPos;
-    private int yPos;
+    private double xPos;
+    private double yPos;
     private int speed;
 
-    public Entity(int health, int coins, Weapon weapon, int points, int Xpos, int Ypos, int speed) {
+    public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, int speed) {
         this.health = health;
         this.coins = coins;
         this.weapon = weapon;
@@ -51,13 +51,13 @@ public class Entity {
         this.points = points;
     }
 
-    public int getxPos() { return xPos; }
+    public double getxPos() { return xPos; }
 
-    public void setxPos(int xPos) { this.xPos = xPos; }
+    public void setxPos(double xPos) { this.xPos = xPos; }
 
-    public int getyPos() { return yPos; }
+    public double getyPos() { return yPos; }
 
-    public void setyPos(int yPos) { this.yPos = yPos; }
+    public void setyPos(double yPos) { this.yPos = yPos; }
 
     public int getSpeed() { return speed; }
 }

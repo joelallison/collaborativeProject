@@ -88,11 +88,25 @@ public class GamePanel extends JPanel implements Runnable {
             player.setXVel(player.getXVel() + player.getSpeed());
         }
 
-        player.setXVel(player.getXVel() * 0.7);
-        player.setYVel(player.getYVel() * 0.7);
+        //limit max speed
+        if (player.getXVel() > (player.getSpeed() * 3.5)){
+            player.setXVel((player.getSpeed() * 3.5));
+        }
+        if (player.getXVel() < (0 - (player.getSpeed() * 3.5))){
+            player.setXVel((0 - (player.getSpeed() * 3.5)));
+        }
+        if (player.getYVel() > (player.getSpeed() * 3.5)){
+            player.setYVel((player.getSpeed() * 3.5));
+        }
+        if (player.getYVel() < (0 - (player.getSpeed() * 3.5))){
+            player.setYVel((0 - (player.getSpeed() * 3.5)));
+        }
 
-        player.setxPos((int) (player.getxPos() + player.getXVel()));
-        player.setyPos((int) (player.getyPos() + player.getYVel()));
+        player.setXVel(player.getXVel() * 0.93);
+        player.setYVel(player.getYVel() * 0.93);
+
+        player.setxPos((player.getxPos() + player.getXVel()));
+        player.setyPos((player.getyPos() + player.getYVel()));
 
     }
 
@@ -104,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.setColor(new Color(0.933f, 0.60f, 0.612f));
 
-        g2.fillRect(player.getxPos(), player.getyPos(), tileSize, tileSize);
+        g2.fillRect((int) player.getxPos(), (int) player.getyPos(), tileSize, tileSize);
 
         g2.dispose();
 
