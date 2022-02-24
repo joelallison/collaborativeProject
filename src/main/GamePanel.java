@@ -136,6 +136,8 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2);
 
         AffineTransform playerPos = AffineTransform.getTranslateInstance((int) player.getxPos(), (int) player.getyPos());
+        AffineTransform playerScale = AffineTransform.getScaleInstance(4.5,4.5);
+        g2.transform(playerScale);
         g2.drawImage(playerImg, playerPos, null);
 
         g2.dispose();
