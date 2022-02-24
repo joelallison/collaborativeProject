@@ -3,8 +3,12 @@ package main;
 import entity.Player;
 import tile.TileManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -25,9 +29,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     int FPS = 60;
 
-    Player player = new Player(1, 0, null, 100, 300, 300, 2, null, 5, 5, 0, 0); //spawns in with slight velocity, nice effect
+    BufferedImage playerImg = ImageIO.read(getClass().getResourceAsStream("/assets/player.png"));
+    Player player = new Player(100, 0, null, 100, 300, 300, 2, playerImg, 5, 5, 0, 0); //spawns in with slight velocity, nice effect
 
-    public GamePanel() {
+    public GamePanel() throws IOException {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(backgroundColor);
@@ -79,6 +84,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         //player movement
+        double speedMult = 3.5;
+        if (keyH.shiftPressed) {
+            speedMult = 7;
+        }
         if (keyH.upPressed) {
             player.setyVel(player.getyVel() - player.getSpeed());
         }
@@ -93,17 +102,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //limit max speed
-        if (player.getxVel() > (player.getSpeed() * 3.5)){
-            player.setxVel((player.getSpeed() * 3.5));
+        if (player.getxVel() > (player.getSpeed() * speedMult)){
+            player.setxVel((player.getSpeed() * speedMult));
         }
-        if (player.getxVel() < (0 - (player.getSpeed() * 3.5))){
-            player.setxVel((0 - (player.getSpeed() * 3.5)));
+        if (player.getxVel() < (0 - (player.getSpeed() * speedMult))){
+            player.setxVel((0 - (player.getSpeed() * speedMult)));
         }
-        if (player.getyVel() > (player.getSpeed() * 3.5)){
-            player.setyVel((player.getSpeed() * 3.5));
+        if (player.getyVel() > (player.getSpeed() * speedMult)){
+            player.setyVel((player.getSpeed() * speedMult));
         }
-        if (player.getyVel() < (0 - (player.getSpeed() * 3.5))){
-            player.setyVel((0 - (player.getSpeed() * 3.5)));
+        if (player.getyVel() < (0 - (player.getSpeed() * speedMult))){
+            player.setyVel((0 - (player.getSpeed() * speedMult)));
         }
 
         //creates glide effect
@@ -126,7 +135,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
 
-        g2.fillRect((int) player.getxPos(), (int) player.getyPos(), tileSize, tileSize);
+        AffineTransform playerPos = AffineTransform.getTranslateInstance((int) player.getxPos(), (int) player.getyPos());
+        g2.drawImage(playerImg, playerPos, null);
 
         g2.dispose();
 
