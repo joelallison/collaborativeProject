@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     int FPS = 60;
+    int centre = 0;
 
     BufferedImage playerImg = ImageIO.read(getClass().getResourceAsStream("/assets/player.png"));
     Player player = new Player(100, 0, null, 100, 300, 300, 2, playerImg, 5, 5, 0, 0); //spawns in with slight velocity, nice effect
@@ -71,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if(delta >= 1) { //every 1/60th of a second
-                update();
+                centre = update(centre);
                 repaint();
                 delta--;
             }
@@ -81,12 +82,17 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void update() {
+    public int update(int centre) {
 
         //player movement
-        double speedMult = 3.5;
+        if (centre == 0) {
+            player.setxPos(90);
+            player.setyPos(50);
+            centre = 1;
+        }
+        double speedMult = 2.5;
         if (keyH.shiftPressed) {
-            speedMult = 7;
+            speedMult = 5;
         }
         if (keyH.upPressed) {
             player.setyVel(player.getyVel() - player.getSpeed());
@@ -123,22 +129,17 @@ public class GamePanel extends JPanel implements Runnable {
         player.setxPos((player.getxPos() + player.getxVel()));
         player.setyPos((player.getyPos() + player.getyVel()));
 
+        return centre;
     }
 
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g; //'convert' Graphics to Graphics2D
-
-        g2.setColor(new Color(0.933f, 0.60f, 0.612f));
-
         tileM.draw(g2);
-
         AffineTransform playerPos = AffineTransform.getTranslateInstance((int) player.getxPos(), (int) player.getyPos());
+        AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
+        g2.transform(playerScale);
         g2.drawImage(playerImg, playerPos, null);
-
         g2.dispose();
-
     }
 }
