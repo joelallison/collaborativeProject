@@ -1,19 +1,27 @@
 package entity;
 
+import main.GamePanel;
+import main.KeyHandler;
+
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
+
     private double xVel = 0;
     private double yVel = 0;
     private int abl1 = 0;
     private int abl2;
+    GamePanel gp;
+    KeyHandler keyH;
 
-    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, BufferedImage image, double XVel, double YVel, int abl1, int abl2) {
+    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, BufferedImage image, double XVel, double YVel, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
         super(health, coins, weapon, points, xPos, yPos, speed, image);
         this.xVel = XVel;
         this.yVel = YVel;
         this.abl1 = abl1;
         this.abl2 = abl2;
+        this.gp = gp;
+        this.keyH = keyH;
     }
 
     public double getxVel() { return xVel; }

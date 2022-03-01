@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int maxScreenRow = 14;
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
+    //(21 * 48)x(14 * 48) --> 1008px by 672px
 
     final Color backgroundColor = new Color(0.3109f, 0.3057f, 0.3834f);
 
@@ -31,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     int centre = 0;
 
     BufferedImage playerImg = ImageIO.read(getClass().getResourceAsStream("/assets/player.png"));
-    Player player = new Player(100, 0, null, 100, 300, 300, 2, playerImg, 5, 5, 0, 0); //spawns in with slight velocity, nice effect
+    Player player = new Player(100, 0, null, 100, 300, 300, 2, playerImg, 5, 5, 0, 0, this, keyH);
 
     public GamePanel() throws IOException {
 
