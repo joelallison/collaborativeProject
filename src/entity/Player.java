@@ -3,6 +3,8 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
@@ -22,6 +24,64 @@ public class Player extends Entity {
         this.abl2 = abl2;
         this.gp = gp;
         this.keyH = keyH;
+    }
+
+    public int update(int centre) {
+        //player movement
+        if (centre == 0) {
+            this.setxPos(90);
+            this.setyPos(50);
+            centre = 1;
+        }
+
+        double speedMult = 1;
+        if (keyH.shiftPressed) {
+            speedMult = 2;
+        }
+        if (keyH.upPressed) {
+            this.setyVel(this.getyVel() - this.getSpeed());
+        }
+        if (keyH.downPressed) {
+            this.setyVel(this.getyVel() + this.getSpeed());
+        }
+        if (keyH.leftPressed) {
+            this.setxVel(this.getxVel() - this.getSpeed());
+        }
+        if (keyH.rightPressed) {
+            this.setxVel(this.getxVel() + this.getSpeed());
+        }
+
+        //limit max speed
+        if (this.getxVel() > (this.getSpeed() * speedMult)){
+            this.setxVel((this.getSpeed() * speedMult));
+        }
+        if (this.getxVel() < (0 - (this.getSpeed() * speedMult))){
+            this.setxVel((0 - (this.getSpeed() * speedMult)));
+        }
+        if (this.getyVel() > (this.getSpeed() * speedMult)){
+            this.setyVel((this.getSpeed() * speedMult));
+        }
+        if (this.getyVel() < (0 - (this.getSpeed() * speedMult))){
+            this.setyVel((0 - (this.getSpeed() * speedMult)));
+        }
+
+        //creates glide effect
+        this.setxVel(this.getxVel() * 0.93);
+        this.setyVel(this.getyVel() * 0.93);
+
+        //changing the positions by velocity implements the glide
+        this.setxPos((this.getxPos() + this.getxVel()));
+        this.setyPos((this.getyPos() + this.getyVel()));
+
+        return centre;
+    }
+
+    public void draw(Graphics2D g2) {
+        AffineTransform playerPos = AffineTransform.getTranslateInstance((int) this.getxPos(), (int) this.getyPos());
+        AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
+        g2.transform(playerScale);
+        g2.drawImage(this.image, playerPos, null);
+
     }
 
     public double getxVel() { return xVel; }
