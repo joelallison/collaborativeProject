@@ -31,8 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
     int centre = 0;
 
-    BufferedImage playerImg = ImageIO.read(getClass().getResourceAsStream("/assets/player.png"));
-    Player player = new Player(100, 0, null, 100, 300, 300, 2, playerImg, 5, 5, 0, 0, this, keyH);
+    Player player = new Player(100, 0, null, 100, 300, 300, 2,0, 0, this, keyH);
 
     public GamePanel() throws IOException {
 
@@ -77,10 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
                 repaint();
                 delta--;
             }
-
-
         }
-
     }
 
     public void update() {

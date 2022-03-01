@@ -3,12 +3,15 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Player extends Entity {
 
+    private String direction;
     private double xVel = 0;
     private double yVel = 0;
     private int abl1 = 0;
@@ -16,14 +19,27 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
-    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, BufferedImage image, double XVel, double YVel, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
-        super(health, coins, weapon, points, xPos, yPos, speed, image);
-        this.xVel = XVel;
-        this.yVel = YVel;
+    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
+        super(health, coins, weapon, points, xPos, yPos, speed);
         this.abl1 = abl1;
         this.abl2 = abl2;
         this.gp = gp;
         this.keyH = keyH;
+
+        direction = "right";
+        getPlayerImage();
+    }
+
+    public void getPlayerImage() {
+
+        try {
+
+            right = ImageIO.read(getClass().getResourceAsStream("/assets/player_right.png"));
+            left = ImageIO.read(getClass().getResourceAsStream("/assets/player_left.png"));
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public int update(int centre) {
@@ -45,9 +61,11 @@ public class Player extends Entity {
             this.setyVel(this.getyVel() + this.getSpeed());
         }
         if (keyH.leftPressed) {
+            direction = "left";
             this.setxVel(this.getxVel() - this.getSpeed());
         }
         if (keyH.rightPressed) {
+            direction = "right";
             this.setxVel(this.getxVel() + this.getSpeed());
         }
 
@@ -80,7 +98,19 @@ public class Player extends Entity {
         AffineTransform playerPos = AffineTransform.getTranslateInstance((int) this.getxPos(), (int) this.getyPos());
         AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
         g2.transform(playerScale);
-        g2.drawImage(this.image, playerPos, null);
+
+        BufferedImage image = null;
+
+        switch(direction) {
+            case "right":
+                image = right;
+                break;
+            case "left":
+                image = left;
+                break;
+        }
+
+        g2.drawImage(image, playerPos, null);
 
     }
 
