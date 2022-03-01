@@ -90,9 +90,9 @@ public class GamePanel extends JPanel implements Runnable {
             player.setyPos(50);
             centre = 1;
         }
-        double speedMult = 2.5;
+        double speedMult = 1;
         if (keyH.shiftPressed) {
-            speedMult = 5;
+            speedMult = 2;
         }
         if (keyH.upPressed) {
             player.setyVel(player.getyVel() - player.getSpeed());

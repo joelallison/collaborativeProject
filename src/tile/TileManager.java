@@ -15,7 +15,7 @@ public class TileManager {
 
         this.gp = gp;
 
-        tile = new Tile[10];
+        tile = new Tile[10]; //how many different tile images
 
         getTileImage();
     }
@@ -34,6 +34,8 @@ public class TileManager {
 
     public void draw(Graphics2D g2) {
 
+
+        //draw background
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 14; j++) {
                 g2.drawImage(tile[0].image, i*gp.tileSize, j*gp.tileSize, gp.tileSize, gp.tileSize, null);
