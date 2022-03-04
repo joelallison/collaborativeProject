@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.awt.geom.Line2D;
+import java.io.InputStream;
 
 public class Player extends Entity {
 
@@ -18,6 +20,11 @@ public class Player extends Entity {
     private int abl2;
     GamePanel gp;
     KeyHandler keyH;
+    boolean waitingForAbility = false;
+    private int sprintMax = 360; //measured in 1/60th of a second.
+    private int sprint;
+    double speedMult;
+
 
     public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
         super(health, coins, weapon, points, xPos, yPos, speed);
@@ -45,15 +52,13 @@ public class Player extends Entity {
     public int update(int centre) {
         //player movement
         if (centre == 0) {
-            this.setxPos(90);
-            this.setyPos(50);
+            this.setxPos(((gp.originalTileSize * gp.maxScreenCol) / 2)-8);
+            this.setyPos(((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
             centre = 1;
         }
 
-        double speedMult = 1;
-        if (keyH.shiftPressed) {
-            speedMult = 2;
-        }
+        manageSprint();
+
         if (keyH.upPressed) {
             this.setyVel(this.getyVel() - this.getSpeed());
         }
@@ -67,6 +72,16 @@ public class Player extends Entity {
         if (keyH.rightPressed) {
             direction = "right";
             this.setxVel(this.getxVel() + this.getSpeed());
+        }
+
+        //ability
+        if (keyH.abilityPressed) { waitingForAbility = true; }
+
+        if (waitingForAbility){
+            if(keyH.abilityPressed == false){
+                doAbility();
+                waitingForAbility = false;
+            }
         }
 
         //limit max speed
@@ -94,8 +109,27 @@ public class Player extends Entity {
         return centre;
     }
 
+    public void doAbility() {
+
+    }
+
+    public void manageSprint() {
+        speedMult = 1.5;
+
+        //if maxsprint - sprint != 0, sprint.
+        //otherwise, sprint - 1;
+        if (keyH.shiftPressed) {
+            if (sprintMax - sprint > 0) {
+                speedMult = 2.5;
+                sprint++;
+            }
+        }else if (sprint > 0){
+            sprint--;
+        }
+    }
+
     public void draw(Graphics2D g2) {
-        AffineTransform playerPos = AffineTransform.getTranslateInstance((int) this.getxPos(), (int) this.getyPos());
+        AffineTransform playerPos = AffineTransform.getTranslateInstance((int) ((gp.originalTileSize * gp.maxScreenCol) / 2)-8, (int) ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
         AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
         g2.transform(playerScale);
 
@@ -110,8 +144,12 @@ public class Player extends Entity {
                 break;
         }
 
-        g2.drawImage(image, playerPos, null);
+        g2.drawImage(image, playerPos, null); //draw player
 
+
+        g2.setColor(new Color(0.773f, 0.643f, 0.42f));
+        g2.setStroke(new BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.1)));
     }
 
     public double getxVel() { return xVel; }
