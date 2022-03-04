@@ -1,6 +1,7 @@
 package tile;
 
 import main.GamePanel;
+import entity.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -32,13 +33,13 @@ public class TileManager {
         }
     }
 
-    public void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2, Player player) {
 
 
         //draw background
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 14; j++) {
-                g2.drawImage(tile[0].image, i*gp.tileSize, j*gp.tileSize, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(tile[0].image, (i*gp.tileSize) - (int) player.getxPos(), j*gp.tileSize - (int) player.getyPos() , gp.tileSize, gp.tileSize, null);
             }
 
         }

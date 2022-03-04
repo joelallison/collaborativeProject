@@ -12,12 +12,12 @@ import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    final int originalTileSize = 16;
+    public final int originalTileSize = 16;
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 21;
-    final int maxScreenRow = 14;
+    public final int maxScreenCol = 21;
+    public final int maxScreenRow = 14;
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
     //(21 * 48)x(14 * 48) --> 1008px by 672px
@@ -26,12 +26,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
+    UI ui = new UI();
     Thread gameThread;
 
     int FPS = 60;
     int centre = 0;
 
-    Player player = new Player(100, 0, null, 100, 300, 300, 2,0, 0, this, keyH);
+    Player player = new Player(100, 0, null, 100, 300, 300, 4,0, 0, this, keyH);
 
     public GamePanel() throws IOException {
 
@@ -86,8 +87,9 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; //'convert' Graphics to Graphics2D
-        tileM.draw(g2);
+        tileM.draw(g2, player);
         player.draw(g2);
+        ui.draw(g2);
         g2.dispose();
     }
 }
