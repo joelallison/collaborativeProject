@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import entity.Weapon;
 import tile.TileManager;
 
 import javax.imageio.ImageIO;
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
     int centre = 0;
 
     Player player = new Player(100, 0, null, 100, 300, 300, 4,0, 0, this, keyH);
+    Weapon gun = new Weapon("gun", 0, 0, 0, 0, 0, 0);
 
     public GamePanel() throws IOException {
 
@@ -82,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         centre = player.update(centre);
+        gun.update();
     }
 
     public void paintComponent(Graphics g) {
@@ -89,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g; //'convert' Graphics to Graphics2D
         tileM.draw(g2, player);
         player.draw(g2);
+        gun.draw(g2);
         ui.draw(g2);
         g2.dispose();
     }

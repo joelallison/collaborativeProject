@@ -21,9 +21,10 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     boolean waitingForAbility = false;
-    private int sprintMax = 360; //measured in 1/60th of a second.
+    private int sprintMax = 120; //measured in 1/60th of a second.
     private int sprint;
     double speedMult;
+    int delay = 0;
 
 
     public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
@@ -115,7 +116,6 @@ public class Player extends Entity {
 
     public void manageSprint() {
         speedMult = 1.5;
-
         //if maxsprint - sprint != 0, sprint.
         //otherwise, sprint - 1;
         if (keyH.shiftPressed) {
@@ -124,12 +124,19 @@ public class Player extends Entity {
                 sprint++;
             }
         }else if (sprint > 0){
-            sprint--;
+            if(sprintMax == sprint){
+                System.out.println("yeeee");
+                delay++;
+                if(delay >= sprintMax*2/3){
+                    sprint--;
+                    delay = 0;
+                }
+            }else{ sprint--; }
         }
     }
 
     public void draw(Graphics2D g2) {
-        AffineTransform playerPos = AffineTransform.getTranslateInstance((int) ((gp.originalTileSize * gp.maxScreenCol) / 2)-8, (int) ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
+        AffineTransform playerPos = AffineTransform.getTranslateInstance(((gp.originalTileSize * gp.maxScreenCol) / 2)-8,  ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
         AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
         g2.transform(playerScale);
 
@@ -147,9 +154,35 @@ public class Player extends Entity {
         g2.drawImage(image, playerPos, null); //draw player
 
 
-        g2.setColor(new Color(0.773f, 0.643f, 0.42f));
+        //sprint bar outline
+        g2.setColor(new Color(0.803f, 0.745f, 0.675f));
         g2.setStroke(new BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.1)));
+        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.3)));
+
+        //colours for sprint bar
+        if((double)sprint/(double)sprintMax > 0.97) {
+            //blackish red
+            g2.setColor(new Color(0.38f/2, 0.20f/2, 0.20f/2));
+        }else if((double)sprint/(double)sprintMax > 0.9){
+            //dark red to blackish red
+            g2.setColor(new Color(0.38f/2 + ((0.38f-0.38f/2)*((float)sprint/(float)sprintMax)/0.97f), 0.20f/2 + ((0.20f-0.20f/2)*((float)sprint/(float)sprintMax)/0.9f), 0.20f/2 + ((0.20f-0.20f/2)*((float)sprint/(float)sprintMax)/0.9f)));
+        }else if ((double)sprint/(double)sprintMax > 0.8){
+            //light red to dark red
+            //light red -> 0.55f, 0.28f, 0.29f
+            g2.setColor(new Color(0.38f + ((0.55f-0.38f)*((float)sprint/(float)sprintMax)/0.9f), 0.20f + ((0.28f-0.20f)*((float)sprint/(float)sprintMax)/0.9f), 0.20f + ((0.29f-0.20f)*((float)sprint/(float)sprintMax)/0.9f)));
+        }else if ((double)sprint/(double)sprintMax > 0.35){
+            //yellow to light red
+            //yellow -> 0.623f, 0.404f, 0.243f
+            g2.setColor(new Color(0.623f + ((0.55f-0.623f)*((float)sprint/(float)sprintMax)/0.8f), 0.404f + ((0.28f-0.404f)*((float)sprint/(float)sprintMax)/0.8f), 0.243f + ((0.29f-0.243f)*((float)sprint/(float)sprintMax)/0.8f)));
+        }else{
+            //green to yellow
+            //green -> 0.31f, 0.33f, 0.31f
+            g2.setColor(new Color(0.31f + ((0.623f-0.31f)*((float)sprint/(float)sprintMax)/0.35f), 0.33f + ((0.404f-0.31f)*((float)sprint/(float)sprintMax)/0.35f), 0.31f + ((0.243f-0.31f)*((float)sprint/(float)sprintMax)/0.35f)));
+        }
+
+        //main bar
+        g2.setStroke(new BasicStroke(3f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.3)));
     }
 
     public double getxVel() { return xVel; }
