@@ -13,11 +13,11 @@ import java.io.IOException;
 public class GamePanel extends JPanel implements Runnable {
 
     public final int originalTileSize = 16;
-    final int scale = 3;
+    public final int scale = 2;
 
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 21;
-    public final int maxScreenRow = 14;
+    public final int maxScreenCol = 31;
+    public final int maxScreenRow = 20;
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
     //(21 * 48)x(14 * 48) --> 1008px by 672px
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
     int centre = 0;
 
-    Player player = new Player(100, 0, null, 100, 300, 300, 4,0, 0, this, keyH);
+    Player player = new Player(100, 0, null, 100, 300, 300, 2.5,0, 0, this, keyH);
 
     public GamePanel() throws IOException {
 

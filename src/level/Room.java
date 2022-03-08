@@ -1,22 +1,18 @@
 package level;
 
 public class Room {
-    private String name;
     private int width;
     private int height;
-    private int[][] layout = new int[width][height];
+    public String[][] layout;
 
-    public Room(String name, int width, int height, int[][] layout) {
-        this.name = name;
+    public Room(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public void setLayout(String[][] layout){
         this.layout = layout;
     }
-
-    public String getName() {
-        return name;
-    }
-
     public int getWidth() {
         return width;
     }
@@ -25,7 +21,7 @@ public class Room {
         return height;
     }
 
-    public int[][] getLayout() {
+    public String[][] getLayout() {
         return layout;
     }
 

@@ -26,7 +26,7 @@ public class Player extends Entity {
     double speedMult;
 
 
-    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
+    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, double speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
         super(health, coins, weapon, points, xPos, yPos, speed);
         this.abl1 = abl1;
         this.abl2 = abl2;
@@ -130,7 +130,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         AffineTransform playerPos = AffineTransform.getTranslateInstance((int) ((gp.originalTileSize * gp.maxScreenCol) / 2)-8, (int) ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
-        AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
+        AffineTransform playerScale = AffineTransform.getScaleInstance(gp.scale,gp.scale);
         g2.transform(playerScale);
 
         BufferedImage image = null;
