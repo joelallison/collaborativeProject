@@ -9,10 +9,10 @@ public class Entity {
     private Weapon weapon;
     private double xPos;
     private double yPos;
-    private int speed;
+    private double speed;
     public BufferedImage right, left;
 
-    public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, int speed) {
+    public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, double speed) {
         this.health = health;
         this.coins = coins;
         this.weapon = weapon;
@@ -62,5 +62,5 @@ public class Entity {
 
     public void setyPos(double yPos) { this.yPos = yPos; }
 
-    public int getSpeed() { return speed; }
+    public double getSpeed() { return speed; }
 }
