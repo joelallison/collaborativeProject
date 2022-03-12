@@ -26,7 +26,7 @@ public class TileManager {
         try {
 
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/assets///tiles/main_tile.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/wall.png"));
 
         }catch (IOException e){
             e.printStackTrace();
