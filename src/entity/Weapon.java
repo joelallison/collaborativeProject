@@ -47,12 +47,12 @@ public class Weapon {
 
     public void draw(Graphics2D g2){
 
-        BufferedImage image = gun;
+        BufferedImage image = null;
 
-        /*switch(weaponName){
+        switch(weaponName){
             case "gun":
                 image = gun;
-        }*/
+        }
 
         g2.drawImage(image, 80,80, null);
 
