@@ -21,7 +21,7 @@ public class UI {
 
         g2.setFont(font.deriveFont(Font.PLAIN, 10F));
         g2.setColor(new Color(0.803f, 0.745f, 0.675f));
-        g2.drawString("sprint", 302, 220);
+        g2.drawString("sprint", 465, 308);
     }
 
 }

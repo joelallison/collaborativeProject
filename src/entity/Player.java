@@ -27,7 +27,7 @@ public class Player extends Entity {
     int delay = 0;
 
 
-    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, int speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
+    public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, double speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
         super(health, coins, weapon, points, xPos, yPos, speed);
         this.abl1 = abl1;
         this.abl2 = abl2;
@@ -125,7 +125,6 @@ public class Player extends Entity {
             }
         }else if (sprint > 0){
             if(sprintMax == sprint){
-                System.out.println("yeeee");
                 delay++;
                 if(delay >= sprintMax*2/3){
                     sprint--;
@@ -137,7 +136,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         AffineTransform playerPos = AffineTransform.getTranslateInstance(((gp.originalTileSize * gp.maxScreenCol) / 2)-8,  ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
-        AffineTransform playerScale = AffineTransform.getScaleInstance(3,3);
+        AffineTransform playerScale = AffineTransform.getScaleInstance(gp.scale,gp.scale);
         g2.transform(playerScale);
 
         BufferedImage image = null;
@@ -157,7 +156,7 @@ public class Player extends Entity {
         //sprint bar outline
         g2.setColor(new Color(0.803f, 0.745f, 0.675f));
         g2.setStroke(new BasicStroke(5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.3)));
+        g2.draw(new Line2D.Double(480, 294, 480, (294 - (sprintMax - sprint)*0.3)));
 
         //colours for sprint bar
         if((double)sprint/(double)sprintMax > 0.97) {
@@ -182,7 +181,7 @@ public class Player extends Entity {
 
         //main bar
         g2.setStroke(new BasicStroke(3f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2.draw(new Line2D.Double(317, 208, 317, (208 - (sprintMax - sprint)*0.3)));
+        g2.draw(new Line2D.Double(480, 294, 480, (294 - (sprintMax - sprint)*0.3)));
     }
 
     public double getxVel() { return xVel; }
