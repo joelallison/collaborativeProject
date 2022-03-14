@@ -7,4 +7,4 @@
 
 
 ## current preview [01/03/2022]
-![](https://i.imgur.com/ZDeLFh0.gif)
+<blockquote class="imgur-embed-pub" lang="en" data-id="ZDeLFh0"  ><a href="//imgur.com/ZDeLFh0"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
