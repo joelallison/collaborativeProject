@@ -13,5 +13,6 @@
     <orderEntry type="library" name="lwjgl-opengl" level="project" />
     <orderEntry type="library" name="lwjgl-glfw" level="project" />
     <orderEntry type="library" name="lwjgl-stb" level="project" />
+    <orderEntry type="library" name="net.sf.ucanaccess" level="project" />
   </component>
 </module>
