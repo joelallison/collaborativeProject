@@ -1,5 +1,13 @@
 package entity;
 
+import main.GamePanel;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public class Weapon {
     private String weaponName;
     private int rpm;
@@ -8,6 +16,8 @@ public class Weapon {
     private int range;
     private int price;
     private int ability;
+    private BufferedImage gunImg;
+    GamePanel gp;
 
     public Weapon(String weaponName, int rpm, int ammoPM, int dmgPerHit, int range, int price, int ability) {
         this.weaponName = weaponName;
@@ -17,6 +27,21 @@ public class Weapon {
         this.range = range;
         this.price = price;
         this.ability = ability;
+    }
+
+    public void getGun() {
+        try {
+            if (this.weaponName.equals("machineGun")) {
+                gunImg = ImageIO.read(getClass().getResourceAsStream("/assets/machineGun"));
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void drawGun(Graphics2D g2) {
+        AffineTransform gunPos = AffineTransform.getTranslateInstance((int) ((gp.originalTileSize * gp.maxScreenCol) / 2)-8, (int) ((gp.originalTileSize * gp.maxScreenRow) / 2)-8);
+        g2.drawImage(gunImg, gunPos, null);
     }
 
     public String getWeaponName() {

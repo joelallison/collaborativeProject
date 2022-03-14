@@ -9,7 +9,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.geom.Line2D;
-import java.io.InputStream;
 
 public class Player extends Entity {
 
