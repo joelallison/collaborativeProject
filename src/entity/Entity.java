@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -10,7 +11,8 @@ public class Entity {
     private double xPos;
     private double yPos;
     private double speed;
-    public BufferedImage right, left;
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 
     public Entity(int health, int coins, Weapon weapon, int points, double xPos, double yPos, double speed) {
         this.health = health;

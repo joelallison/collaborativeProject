@@ -22,19 +22,27 @@ public class FileHandler {
         }
     }
 
-    public String[][] level(String filename){
+    public static String[][] level(String filename){
+        String[][] level = new String[0][0];
         File file = new File(filename);
-        //String[][] level;
-
-        //do like png with dimensions at start, then declare the String[][] after, with that data
+        int lineNum = 0;
 
         try {
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
+
                 String data = myReader.nextLine();
-                System.out.println(data);
+                String[] line = data.split(" ");
+
+                if (lineNum == 0){ level = new String[Integer.parseInt(line[0])][Integer.parseInt(line[1])]; } //set dimensions of the 2D array
+                else {
+                    level[lineNum-1] = line;
+                }
+
+                lineNum++;
             }
             myReader.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

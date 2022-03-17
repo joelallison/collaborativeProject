@@ -26,7 +26,6 @@ public class Main {
         window.pack();
 
         userDBControl.accessDB();
-
         gamePanel.startGameThread();
     }
 }

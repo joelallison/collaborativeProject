@@ -24,6 +24,7 @@ public class Player extends Entity {
     private int sprint;
     double speedMult;
     int delay = 0;
+    private BufferedImage right, left;
 
 
     public Player(int health, int coins, Weapon weapon, int points, int xPos, int yPos, double speed, int abl1, int abl2, GamePanel gp, KeyHandler keyH) {
@@ -32,6 +33,12 @@ public class Player extends Entity {
         this.abl2 = abl2;
         this.gp = gp;
         this.keyH = keyH;
+
+        solidArea = new Rectangle();
+        solidArea.x = 2*gp.scale;
+        solidArea.y = 0;
+        solidArea.width = 12*gp.scale;
+        solidArea.height = 16*gp.scale;
 
         direction = "right";
         getPlayerImage();
@@ -105,6 +112,9 @@ public class Player extends Entity {
         //changing the positions by velocity implements the glide
         this.setxPos((this.getxPos() + this.getxVel()));
         this.setyPos((this.getyPos() + this.getyVel()));
+
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
 
         return centre;
     }

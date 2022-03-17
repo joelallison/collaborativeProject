@@ -1,5 +1,6 @@
 package tile;
 
+import main.FileHandler;
 import main.GamePanel;
 import entity.Player;
 
@@ -27,6 +28,13 @@ public class TileManager {
 
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/wall.png"));
+            tile[0].collision = true;
+
+            tile[1] = new Tile();
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/blank.png"));
+
+            tile[2] = new Tile();
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/top.png"));
 
         }catch (IOException e){
             e.printStackTrace();
@@ -36,10 +44,11 @@ public class TileManager {
     public void draw(Graphics2D g2, Player player) {
 
 
-        //draw background
-        for (int i = 0; i < 21; i++) {
-            for (int j = 0; j < 14; j++) {
-                g2.drawImage(tile[0].image, (i*gp.tileSize) - (int) player.getxPos(), j*gp.tileSize - (int) player.getyPos() , gp.tileSize, gp.tileSize, null);
+        String[][] level = FileHandler.level("src/assets/levels/room1");
+
+        for (int i = 0; i < level.length; i++) {
+            for (int j = 0; j < level[i].length; j++) {
+                g2.drawImage(tile[Integer.parseInt(level[j][i])].image, (i*gp.tileSize) - (int) player.getxPos(), j*gp.tileSize - (int) player.getyPos() , gp.tileSize, gp.tileSize, null);
             }
 
         }
