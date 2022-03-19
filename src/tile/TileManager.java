@@ -62,6 +62,15 @@ public class TileManager {
             tile[9] = new Tile();
             tile[9].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/bottomleft.png"));
 
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/left.png"));
+
+            tile[4] = new Tile();
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/right.png"));
+
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/assets/tiles/bottom.png"));
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -88,9 +97,9 @@ public class TileManager {
                     }if(j < room[i].length-1 && room[j+1][i].equals("0")) { //top
                         room[j+1][i] = "2";
                     }if(i > 0 && room[j][i-1].equals("0")) { //right
-                        room[j][i-1] = "3";
+                        room[j][i-1] = "4";
                     }if(i < room.length-1 && room[j][i+1].equals("0")) { //left
-                        room[j][i+1] = "4";
+                        room[j][i+1] = "3";
                     }
                 }
                 if(!(room[j][i].equals("1"))){
