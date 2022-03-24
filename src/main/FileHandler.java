@@ -2,8 +2,6 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -34,9 +32,11 @@ public class FileHandler {
                 String data = myReader.nextLine();
                 String[] line = data.split(" ");
 
-                if (lineNum == 0){ level = new String[Integer.parseInt(line[0])][Integer.parseInt(line[1])]; } //set dimensions of the 2D array
+                if (lineNum == 0) {
+                    level = new String[Integer.parseInt(line[1])][Integer.parseInt(line[0])];
+                } //set dimensions of the 2D array
                 else {
-                    level[lineNum-1] = line;
+                    level[lineNum - 1] = line;
                 }
 
                 lineNum++;

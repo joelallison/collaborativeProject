@@ -3,11 +3,8 @@ package main;
 import entity.Player;
 import tile.TileManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -22,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow;
     //(21 * 48)x(14 * 48) --> 1008px by 672px
 
-    final Color backgroundColor = new Color(0.3109f, 0.3057f, 0.3834f);
+    final Color backgroundColor = Color.decode("#3c3b4a");
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
@@ -33,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
     int centre = 0;
 
-    Player player = new Player(100, 0, null, 100, 300, 300, 2.5,0, 0, this, keyH);
+    Player player = new Player(100, 0, null, 100, 0, 0, 2.5, 0, 0, this, keyH);
 
     public GamePanel() throws IOException {
 
