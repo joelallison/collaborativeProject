@@ -11,10 +11,13 @@ public class FileHandler {
             case 0: //level
                 level(filename);
                 break;
-            case 1: //weapon data
+            case 1: //level
+                getRoomDimensions(filename);
+                break;
+            case 2: //weapon data
 
                 break;
-            case 2: //enemy data
+            case 3: //enemy data
 
                 break;
         }
@@ -50,6 +53,22 @@ public class FileHandler {
         return level;
     }
 
+    public static int[] getRoomDimensions(String filename) {
+        File file = new File(filename);
+        int[] dimensions = new int[0];
+
+        try {
+            Scanner myReader = new Scanner(file);
+            String firstLine = myReader.nextLine();
+            dimensions = new int[]{Integer.parseInt(firstLine.split(" ")[0]), Integer.parseInt(firstLine.split(" ")[1])};
+
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        return dimensions;
+    }
 
 
 }

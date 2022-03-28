@@ -1,22 +1,22 @@
 package main;
 
-import main.FileHandler;
+public class Room {
 
-import java.io.IOException;
-import java.util.ArrayList;
+    public int width;
+    public int height;
+    public String filename;
+    public String[][] layout;
+    int howMany;
 
-public class LevelGenerator {
 
-    private int width;
-    private int height;
-    public String[][] door_room;
-    public String[][] room_1;
+    public Room(String filename, int howMany) {
+        this.filename = filename;
+        this.howMany = howMany;
 
-    ArrayList<String[][]> rooms = new ArrayList<>();
+        this.layout = processRoom(FileHandler.level("src/assets/levels/" + filename));
 
-    public LevelGenerator() {
-        door_room = processRoom(FileHandler.level("src/assets/levels/door_room"));
-        room_1 = processRoom(FileHandler.level("src/assets/levels/room_1"));
+        this.width = FileHandler.getRoomDimensions("src/assets/levels/" + filename)[0];
+        this.height = FileHandler.getRoomDimensions("src/assets/levels/" + filename)[1];
     }
 
     public String[][] processRoom(String[][] room) {
@@ -56,7 +56,13 @@ public class LevelGenerator {
         return room;
     }
 
-    public void addRoom(String[][] room){ rooms.add(room); }
+    public int getHowMany() {
+        return howMany;
+    }
+
+    public String[][] getLayout() {
+        return layout;
+    }
 
     public int getWidth() {
         return width;

@@ -1,9 +1,8 @@
 package tile;
 
 import entity.Player;
-import main.FileHandler;
 import main.GamePanel;
-import main.LevelGenerator;
+import main.MapBuilder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +12,7 @@ public class TileManager {
 
     GamePanel gp;
     Tile[] tile;
-    LevelGenerator lg;
+    MapBuilder mb;
 
     public TileManager(GamePanel gp) {
 
@@ -94,17 +93,17 @@ public class TileManager {
 
     public void draw(Graphics2D g2, Player player) {
 
-        for (int y = 0; y < lg.room_1.length; y++) {
-            for (int x = 0; x < lg.room_1[y].length; x++) {
-                g2.drawImage(tile[Integer.parseInt(lg.room_1[y][x])].image, (x * gp.tileSize) - (int) player.getxPos(), y * gp.tileSize - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
-            }
-        }
-
-        /*for (int y = 0; y < lg.door_room.length; y++) {
-            for (int x = 0; x < lg.door_room[y].length; x++) {
-                g2.drawImage(tile[Integer.parseInt(lg.door_room[y][x])].image, ((x + 3) * gp.tileSize) - (int) player.getxPos(), (y * gp.tileSize) - (lg.door_room.length * gp.tileSize) - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
+        /*for (int y = 0; y < mb.map.length; y++) {
+            for (int x = 0; x < mb.map[y].length; x++) {
+                g2.drawImage(tile[Integer.parseInt(mb.map[y][x])].image, (x * gp.tileSize) - (int) player.getxPos(), y * gp.tileSize - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
             }
         }*/
+
+        for (int y = 0; y < mb.map.length; y++) {
+            for (int x = 0; x < mb.map[y].length; x++) {
+                g2.drawImage(tile[Integer.parseInt(mb.map[y][x])].image, (x * gp.tileSize), y * gp.tileSize, gp.tileSize, gp.tileSize, null);
+            }
+        }
 
     }
 }

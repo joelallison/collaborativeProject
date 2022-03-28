@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+
 public class GamePanel extends JPanel implements Runnable {
 
     public final int originalTileSize = 16;
@@ -82,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
         centre = player.update(centre);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; //'convert' Graphics to Graphics2D
