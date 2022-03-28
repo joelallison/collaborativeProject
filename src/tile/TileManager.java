@@ -3,6 +3,7 @@ package tile;
 import entity.Player;
 import main.FileHandler;
 import main.GamePanel;
+import main.LevelGenerator;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,8 +13,7 @@ public class TileManager {
 
     GamePanel gp;
     Tile[] tile;
-    String[][] door_room = FileHandler.level("src/assets/levels/door_room");
-    String[][] room_1 = FileHandler.level("src/assets/levels/room_1");
+    LevelGenerator lg;
 
     public TileManager(GamePanel gp) {
 
@@ -23,13 +23,9 @@ public class TileManager {
 
         getTileImage();
 
-
     }
 
     public void getTileImage() {
-
-        door_room = processRoom(door_room);
-        room_1 = processRoom(room_1);
 
         try {
 
@@ -98,54 +94,17 @@ public class TileManager {
 
     public void draw(Graphics2D g2, Player player) {
 
-        for (int y = 0; y < room_1.length; y++) {
-            for (int x = 0; x < room_1[y].length; x++) {
-                g2.drawImage(tile[Integer.parseInt(room_1[y][x])].image, (x * gp.tileSize) - (int) player.getxPos(), y * gp.tileSize - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
+        for (int y = 0; y < lg.room_1.length; y++) {
+            for (int x = 0; x < lg.room_1[y].length; x++) {
+                g2.drawImage(tile[Integer.parseInt(lg.room_1[y][x])].image, (x * gp.tileSize) - (int) player.getxPos(), y * gp.tileSize - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
             }
         }
 
-        for (int y = 0; y < door_room.length; y++) {
-            for (int x = 0; x < door_room[y].length; x++) {
-                g2.drawImage(tile[Integer.parseInt(door_room[y][x])].image, ((x + 3) * gp.tileSize) - (int) player.getxPos(), (y * gp.tileSize) - (door_room.length * gp.tileSize) - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
+        /*for (int y = 0; y < lg.door_room.length; y++) {
+            for (int x = 0; x < lg.door_room[y].length; x++) {
+                g2.drawImage(tile[Integer.parseInt(lg.door_room[y][x])].image, ((x + 3) * gp.tileSize) - (int) player.getxPos(), (y * gp.tileSize) - (lg.door_room.length * gp.tileSize) - (int) player.getyPos(), gp.tileSize, gp.tileSize, null);
             }
-        }
+        }*/
 
-    }
-
-    public String[][] processRoom(String[][] room) {
-        for (int y = 0; y < room.length; y++) { //y
-            for (int x = 0; x < room[y].length; x++) { //x
-                if (room[y][x].equals("1")) {
-                    if (y < room.length - 1 && room[y + 1][x].equals("0")) { //top
-                        room[y + 1][x] = "2";
-                    }
-                    if (y > 0 && room[y - 1][x].equals("0")) { //bottom
-                        room[y - 1][x] = "5";
-                    }
-                    if (x > 0 && room[y][x - 1].equals("0")) { //right
-                        room[y][x - 1] = "3";
-                    }
-                    if (x < room[y].length - 1 && room[y][x + 1].equals("0")) { //left
-                        room[y][x + 1] = "4";
-                    }
-                }
-
-                if (!(room[y][x].equals("1"))) {
-                    if ((x < room[y].length - 1 && y > 0) && room[y - 1][x].equals("1") && room[y][x + 1].equals("1")) { //topright
-                        room[y][x] = "6";
-                    }
-                    if ((x > 0 && y > 0) && room[y - 1][x].equals("1") && room[y][x - 1].equals("1")) { //topleft
-                        room[y][x] = "7";
-                    }
-                    if ((y < room.length - 1 && x < room[y].length - 1) && room[y + 1][x].equals("1") && room[y][x + 1].equals("1")) { //bottomright
-                        room[y][x] = "8";
-                    }
-                    if ((x > 0 && y < room.length - 1) && room[y + 1][x].equals("1") && room[y][x - 1].equals("1")) { //bottomleft
-                        room[y][x] = "9";
-                    }
-                }
-            }
-        }
-        return room;
     }
 }
